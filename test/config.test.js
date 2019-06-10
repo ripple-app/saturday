@@ -1,6 +1,6 @@
 
 const sinon = require('sinon');
-const config = require('../../src/config/config');
+const Config = require('../src/config');
 
 describe('config', () => {
     const MockRequest = (function () {
@@ -26,10 +26,13 @@ describe('config', () => {
             },
             statusCode: 200
         };
-    })
+    });
+
+    let config;
+
     beforeAll(() => {
-        jest.mock('../../src/postman/postman');
-        const Postman = require('../../src/postman/postman');
+        jest.mock('../src/postman');
+        const Postman = require('../src/postman');
         Postman.mockImplementation(() => {
             return {
                 connect: function(options) {
@@ -42,6 +45,12 @@ describe('config', () => {
         });
     });
 
+    beforeEach(() => {
+        config = Config({
+            host: 'localhost',
+            port: '5000'
+        });
+    })
     afterEach(() => {
         sinon.restore();
     });
@@ -64,12 +73,6 @@ describe('config', () => {
     // });
 
     test('configureJSON', async () => {
-        config.setSaturday();
-        config.setPostman({
-            host: 'localhost',
-            port: '5000'
-        });
-
         const id = '1';
         const req = new MockRequest();
         const res = new McokResponse();
@@ -79,12 +82,6 @@ describe('config', () => {
     });
 
     test('configureSend', async () => {
-        config.setSaturday();
-        config.setPostman({
-            host: 'localhost',
-            port: '5000'
-        });
-
         const id = '1';
         const req = new MockRequest();
         const res = new McokResponse();
@@ -94,12 +91,6 @@ describe('config', () => {
     });
 
     test('configureEnd', async () => {
-        config.setSaturday();
-        config.setPostman({
-            host: 'localhost',
-            port: '5000'
-        });
-
         const id = '1';
         const req = new MockRequest();
         const res = new McokResponse();
