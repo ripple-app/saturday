@@ -52,15 +52,11 @@ function get(id) {
     return collector[id];
 }
 
-module.exports = {
-    start,
-    end,
-    remove,
-    get
+module.exports = function () {
+    return {
+        start,
+        end,
+        remove,
+        get
+    };
 };
-
-module.exports.__private__ = {
-    getCollector: function() { // for test
-        return collector;
-    }
-}

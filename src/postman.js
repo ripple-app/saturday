@@ -27,8 +27,10 @@ function send(message) {
     socket.emit('data', `${JSON.stringify(message)}!`);
 }
 
-module.exports = {
-    send,
-    connect
+module.exports = function(options) {
+    connect(options);
+    return {
+        send
+    }
 };
 

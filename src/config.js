@@ -1,5 +1,5 @@
-const Saturday = require('../saturday');
-const Postman = require('../postman');
+const Saturday = require('./saturday');
+const Postman = require('./postman');
 
 let _saturday;
 let _postman;
@@ -75,23 +75,13 @@ function configureEnd(id, req, res) {
     });
 }
 
-function getPostman() {
-    return _postman;
-}
+module.exports = function (options) {
+    setSaturday();
+    setPostman(options);
 
-function getSaturday() {
-    return _saturday;
-}
-
-module.exports = {
-    configureJSON,
-    configureSend,
-    configureEnd,
-    setSaturday,
-    setPostman
+    return {
+        configureJSON,
+        configureSend,
+        configureEnd
+    };
 };
-
-module.exports.__private__ = {
-    getSaturday,
-    getPostman
-}

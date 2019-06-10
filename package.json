@@ -4,7 +4,7 @@
   "description": "saturday is monitoring tool for Express.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./example/app.js --exec babel-node --ignore ./test/",
+    "start": "nodemon ./example --exec babel-node --ignore ./test/",
     "test": "jest --config jest.config.js",
     "lint": "eslint --cache ./"
   },
@@ -26,7 +26,7 @@
     "express",
     "monitor"
   ],
-  "homepage":"https://github.com/ripple-app/saturday",
+  "homepage": "https://github.com/ripple-app/saturday",
   "engines": {
     "node": ">=8.14.0"
   },
@@ -50,6 +50,43 @@
     "eslint-plugin-flowtype": "^3.9.1",
     "eslint-plugin-import": "^2.17.3",
     "jest": "^24.8.0",
-    "sinon": "^7.3.2"
+    "sinon": "^7.3.2",
+    "validate-commit-msg": "^2.14.0",
+    "husky": "^2.3.0"
+  },
+  "config": {
+    "types": [
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "build",
+      "ci",
+      "chore",
+      "revert"
+    ],
+    "scope": {
+      "required": false,
+      "allowed": [
+        "*"
+      ],
+      "validate": false,
+      "multiple": false
+    },
+    "warnOnFail": false,
+    "maxSubjectLength": 100,
+    "subjectPattern": ".+",
+    "subjectPatternErrorMsg": "subject does not match subject pattern!",
+    "helpMessage": "Please confirm your commit message format.",
+    "autoFix": false
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg",
+      "pre-push": "npm test"
+    }
   }
 }
